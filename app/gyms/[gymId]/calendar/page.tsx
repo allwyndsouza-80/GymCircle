@@ -5,8 +5,8 @@ import '@/app/landing.css'
 import '@/app/internal.css'
 
 interface CalendarPageProps {
-  params: { gymId: string }
-  searchParams: { date?: string }
+  params: Promise<{ gymId: string }>
+  searchParams: Promise<{ date?: string }>
 }
 
 function formatDateLabel(date: Date) {
@@ -28,7 +28,8 @@ export default async function GymCalendarPage({ params, searchParams }: Calendar
     redirect('/login')
   }
 
-  const gymId = params.gymId
+  const { gymId } = await params
+  const { date } = await searchParams
 
   const { getGymAccess } = await import('@/lib/gym-access')
   const access = await getGymAccess((supabase as any), gymId, user.id)
@@ -38,7 +39,7 @@ export default async function GymCalendarPage({ params, searchParams }: Calendar
 
   // Determine active date (default today)
   const today = new Date()
-  const activeDateStr = searchParams.date ?? today.toISOString().slice(0, 10)
+  const activeDateStr = date ?? today.toISOString().slice(0, 10)
   const activeDate = new Date(activeDateStr)
 
   // Load workouts for this gym & date
@@ -136,4 +137,3 @@ export default async function GymCalendarPage({ params, searchParams }: Calendar
     </div>
   )
 }
-

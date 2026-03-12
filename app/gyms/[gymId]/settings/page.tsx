@@ -6,7 +6,7 @@ import '@/app/landing.css'
 import '@/app/internal.css'
 
 interface GymSettingsPageProps {
-  params: { gymId: string }
+  params: Promise<{ gymId: string }>
 }
 
 export default async function GymSettingsPage({ params }: GymSettingsPageProps) {
@@ -17,8 +17,8 @@ export default async function GymSettingsPage({ params }: GymSettingsPageProps) 
 
   if (!user) redirect('/login')
 
-  const gymId = params.gymId
-  const access = await getGymAccess(supabase, gymId, user.id)
+  const { gymId } = await params
+  const access = await getGymAccess((supabase as any), gymId, user.id)
   if (!access.allowed || access.role !== 'owner') {
     redirect('/dashboard')
   }
