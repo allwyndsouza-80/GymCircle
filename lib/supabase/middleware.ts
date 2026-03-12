@@ -2,6 +2,15 @@ import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
 export async function updateSession(request: NextRequest) {
+  // If OAuth sent user to root with ?code=..., send them to the callback so the session is created
+  if (request.nextUrl.pathname === '/' && request.nextUrl.searchParams.get('code')) {
+    const callbackUrl = new URL('/auth/callback', request.url);
+    request.nextUrl.searchParams.forEach((value, key) => {
+      callbackUrl.searchParams.set(key, value);
+    });
+    return NextResponse.redirect(callbackUrl);
+  }
+
   let supabaseResponse = NextResponse.next({
     request,
   });
