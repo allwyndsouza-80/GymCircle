@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import { APP_NAME, APP_DESCRIPTION } from '@/lib/constants'
+import { AppStoreHydrator } from '@/components/app-store-hydrator/app-store-hydrater'
 
 
 export const metadata: Metadata = {
@@ -18,7 +19,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body >{children}</body>
+      <body >
+      <AppStoreHydrator />
+        {children}
+        </body>
     </html>
   )
 }

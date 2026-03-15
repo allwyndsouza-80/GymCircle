@@ -122,10 +122,6 @@
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--color-primary);
-  margin-bottom: var(--spacing-sm);
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
 }
 
 .gym-section-label::before {

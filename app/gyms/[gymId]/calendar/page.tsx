@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation'
 import { CreateWorkoutForm } from '@/components/workout/create-workout-form'
 import '@/app/landing.css'
 import '@/app/internal.css'
+import BackButton from '@/components/back-button/back-button'
 
 interface CalendarPageProps {
   params: Promise<{ gymId: string }>
@@ -53,14 +54,7 @@ export default async function GymCalendarPage({ params, searchParams }: Calendar
   return (
     <div className="gym-internal-page gym-section-sm">
       <div className="gym-container">
-        {/* Header */}
-        <div style={{ marginBottom: 'var(--spacing-xl)' }}>
-          <span className="gym-section-label">Calendar</span>
-          <h1 className="gym-page-title">{gym.name}</h1>
-          <p className="gym-page-subtitle">
-            {gym.location} • {role.toUpperCase()}
-          </p>
-        </div>
+        <BackButton gymName={gym.name} pageName="Calendar" />
 
         {/* Date selector + summary */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', alignItems: 'center', marginBottom: 'var(--spacing-lg)' }}>

@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { getGymAccess } from '@/lib/gym-access'
 import '@/app/landing.css'
 import '@/app/internal.css'
+import BackButton from '@/components/back-button/back-button'
 
 interface GymOverviewPageProps {
   params: Promise<{ gymId: string }>
@@ -40,14 +41,7 @@ export default async function GymOverviewPage({ params }: GymOverviewPageProps) 
   return (
     <div className="gym-internal-page gym-section-sm">
       <div className="gym-container">
-        {/* Header */}
-        <div style={{ marginBottom: 'var(--spacing-xl)' }}>
-          <span className="gym-section-label">Gym Overview</span>
-          <h1 className="gym-page-title">{gym.name}</h1>
-          <p className="gym-page-subtitle">
-            {gym.location} • {role.toUpperCase()}
-          </p>
-        </div>
+      <BackButton gymName={gym.name} pageName="Overview" />
 
         {/* Primary actions */}
         <div className="gym-grid gym-grid-3" style={{ marginBottom: 'var(--spacing-2xl)' }}>

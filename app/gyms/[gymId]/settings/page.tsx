@@ -4,6 +4,7 @@ import { getGymAccess } from '@/lib/gym-access'
 import { GymSettingsForm } from '@/components/gym/gym-settings-form'
 import '@/app/landing.css'
 import '@/app/internal.css'
+import BackButton from '@/components/back-button/back-button'
 
 interface GymSettingsPageProps {
   params: Promise<{ gymId: string }>
@@ -34,13 +35,7 @@ export default async function GymSettingsPage({ params }: GymSettingsPageProps) 
   return (
     <div className="gym-internal-page gym-section-sm">
       <div className="gym-container">
-        <div style={{ marginBottom: 'var(--spacing-xl)' }}>
-          <span className="gym-section-label">Gym Settings</span>
-          <h1 className="gym-page-title">{gym.name}</h1>
-          <p className="gym-page-subtitle">
-            {gym.location} • OWNER
-          </p>
-        </div>
+        <BackButton gymName="" pageName="Settings" />
 
         <GymSettingsForm
           gymId={gymId}
